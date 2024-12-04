@@ -28,18 +28,26 @@
           <span class="card__list-text">And much more!</span>
         </li>
       </ul>
-    </main>
-    <footer class="footer">
-      <form class="footer__form"> 
-        <label class="footer__email-label">Email address</label>
-        <input class="footer__text-input" type="email" placeholder="email@company.com">
-        <button class="footer__button footer__button-active">Subscribe to monthly newsletter</button>
+      <form class="card__footer"> 
+        <label class="card__footer-label">Email address</label>
+        <input class="card__footer-input" type="email" placeholder="email@company.com">
+        <button class="card__footer-button card__footer-button--active">Subscribe to monthly newsletter</button>
       </form>
-    </footer>
+    </main>
   </section>
   <!-- Sign-up form end -->
 
   <!-- Success message start -->
+   <script>
+      const button = document.querySelector('.footer__button');
+      const card = document.querySelector('.card');
+
+      button.addEventListener('click', () => {
+        card.innerHTML = '';
+      });
+
+            
+   </script>
 
   <!-- Thanks for subscribing!
 

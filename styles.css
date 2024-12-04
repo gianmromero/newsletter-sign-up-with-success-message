@@ -54,6 +54,7 @@ body {
 }
 .card__list {
     list-style: none;
+    margin-bottom: 2.5em;
 }
 .card__list-item {
     position: relative;
@@ -71,19 +72,17 @@ body {
     background-size: contain;
 }
 
-.footer {
-    padding: 0.5em 1.5em 2.5em 1.5em;
-    background-color: var(--white);
+.card__footer {
+    margin: 0.5em 0.2em 2.5em 0.2em;
 }
-
-.footer__email-label {
+.card__footer-label {
     font-size: 0.75rem;
     font-weight: bold;
     line-height: 150%;
     letter-spacing: 0;
     margin-bottom: 0.5em;
 }
-.footer__text-input {
+.card__footer-input {
     width: 100%;
     padding: 1.25em;
     margin-bottom: 1.5em;
@@ -91,15 +90,15 @@ body {
     border-color: hsla(240, 27.8%, 13.1%, 0.25);
     border-width: 0.0625em;
 }
-.footer__text-input::placeholder {
+.card__footer-input::placeholder {
     opacity: 1;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     
 }
-.footer__button {
+.card__footer-button {
     width: 100%;
-    padding: 1.25em;
+    padding: 1em;
     border-radius: 0.5em;
     border-style: none;
     background-color: var(--dark-slate-grey);
@@ -117,27 +116,22 @@ body {
         grid-template-rows: auto;
         grid-template-areas: 
         'content header'
-        'footer header';
-        
+        'content header';
     }
     .card__header-image {
         content: url('assets/images/illustration-sign-up-desktop.svg');
         grid-area: header;
-        padding: 24px;
+        padding: 22px;
         border-radius: 0 36px 36px 0;
     }
     .card__content {
+        grid-area: content;
         width: 100%;
-        height: 100%;
-        padding: 97px 64px 0 64px;
-        border-radius: 36px 0 0 0;
+        padding: 94px 54px 93.6px 65px;
+        border-radius: 36px 0 0 36px;
     }
-    .footer {
+    .card__footer {
         width: 100%;
-        height: 100%;
-        padding-left: 64px;
-        padding-right: 64px;
-        border-radius: 0 0 0 36px;
     }
 
     .card__title {
