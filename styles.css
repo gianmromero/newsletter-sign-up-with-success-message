@@ -121,13 +121,13 @@ body {
     .card__header-image {
         content: url('assets/images/illustration-sign-up-desktop.svg');
         grid-area: header;
-        padding: 22px;
+        padding: 21.5px;
         border-radius: 0 36px 36px 0;
     }
     .card__content {
         grid-area: content;
         width: 100%;
-        padding: 94px 54px 93.6px 65px;
+        padding: 94px 54px 92px 65px;
         border-radius: 36px 0 0 36px;
     }
     .card__footer {
