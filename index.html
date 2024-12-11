@@ -18,7 +18,7 @@
       <h1 class="card__title">Stay updated!</h1>
       <p class="card__headline">Join 60,000+ product managers receiving monthly updates on:</p>
       <ul class="card__list">
-        <li class="card__list-item">
+        <li class="card__list-item"> 
           <span class="card__list-text">Product discovery and building what matters</span> 
         </li>
         <li class="card__list-item">
@@ -28,82 +28,100 @@
           <span class="card__list-text">And much more!</span>
         </li>
       </ul>
-      <form class="card__footer"> 
+      <form class="card__footer" novalidate> 
         <label class="card__footer-label">Email address</label>
-        <input class="card__footer-input" type="email" placeholder="email@company.com" required >
-        <button class="card__footer-button card__footer-button--active">Subscribe to monthly newsletter</button>
+        <span class="error" aria-live="polite"></span>
+        <input class="card__footer-input" type="email" placeholder="email@company.com" name="mail" required> 
+        <button type="submit" class="card__footer-button card__footer-button--active">Subscribe to monthly newsletter</button>
       </form>
     </main>
   </section>
   <!-- Sign-up form end -->
 
   <!-- Success message start -->
-   <script>
-      const mobile = window.matchMedia('(max-width: 1023px)');
-      const button = document.querySelector('.card__footer-button');
-      const header = document.querySelector('.card__header-image');
-      const content = document.querySelector('.card__content');
-
-      function handler(event) {
-        if (event.matches) {
-          button.addEventListener('click', () => {
-          header.style.display = 'none';
-          content.innerHTML = '';
-          content.innerHTML = `
-          <img class="card__header-image" 
-          src="assets/images/icon-success.svg"
-          alt="Orange circle with checkmark inside it"
-          style="margin: 149px 0 40px 0;"></img>
-
-          <h1 class="card__title">Thanks for subscribing!</h1>
-          <p class="card__headline">A confirmation email has been sent to <b>ash@loremcompany.com</b>. 
-          Please open it and click the button inside to confirm your subscription.</p>
-          <button class="card__footer-button" style="margin-top:223px;">Dismiss message</button>`;
-      });
-        } else {
-          pass;
-        }
-      }
-      handler(mobile);
-      mobile.addEventListener('change', handler);
-   </script>
-
-   <!-- Desktop Script -->
     <script>
-      const desktop = window.matchMedia('(min-width: 1024px)');
-      const header_des = document.querySelector('.card__header-image');
-      const content_des = document.querySelector('.card__content');
-      const button_des = document.querySelector('.card__footer-button');
-      
+      //Validation
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector('.card__footer');
+        const email = document.querySelector('.card__footer-input');
+        const emailError = document.querySelector('.card__footer-label + .error');
+        const button = document.querySelector('.card__footer-button');
 
-      function handleDesktop(event) {
-        if (event.matches) {
-          button_des.addEventListener('click', () => {
-            header_des.style.display = 'none';
-            content_des.innerHTML = '';
-            content_des.style.width = '504px';
-            content_des.style.padding = "48px 64px 64px 64px";
-           
-            content_des.style.borderRadius = '36px';
-            content_des.innerHTML = ` 
-            <img 
-            class"card__header-image"
-            src="assets/images/icon-success.svg"
-            alt="Orange circle with checkmark inside it"
-            style="margin-bottom: 40px;"
-            ></img>
-            <h1 class="card__title">Thanks for subscribing!</h1>
-            <p class="card__headline">A confirmation email has been sent to <b>ash@loremcompany.com</b>. 
-            Please open it and click the button inside to confirm your subscription.</p>
-            <button class="card__footer-button" style="margin-top:40px; ">Dismiss message</button>`;
-          });
-        } else {
-          pass;
+        email.addEventListener("input", () => {
+          if (email.validity.valid) {
+            emailError.innerHTML = '';
+            
+            if (window.matchMedia('(min-width: 1024px)').matches) {
+                button.addEventListener('click', executeOnDesktop);
+            }
+            else if (window.matchMedia('(max-width: 1023px)').matches) {
+                button.addEventListener('click', executeOnMobile);
+            }
+          } else {
+            showError();
+          }
+        });
+
+        form.addEventListener("submit", (event) => {
+          if (!email.validity.valid) {
+            showError();
+            event.preventDefault();
+          } 
+        });
+
+        function showError() {
+          if (email.validity.valueMissing) {
+            emailError.innerHTML = '<span class="error" style="margin-left: 175px;">Valid email required</span>';
+          } else if (email.validity.typeMismatch) {
+              emailError.innerHTML = '<span class="error" style="margin-left: 175px;">Valid email required</span>';
+          }
         }
+      });
+      //Success message on Mobile
+      function executeOnMobile() {
+        const header = document.querySelector('.card__header-image');
+        const content = document.querySelector('.card__content');
+        const input = document.querySelector('.card__footer-input').value;
+
+        header.style.display = 'none';
+        content.innerHTML = '';
+        content.innerHTML = `
+        <img class="card__header-image" 
+        src="assets/images/icon-success.svg"
+        alt="Orange circle with checkmark inside it"
+        style="margin: 149px 0 40px 0;"></img>
+
+        <h1 class="card__title">Thanks for subscribing!</h1>
+        <p class="card__headline">A confirmation email has been sent to <b>${input}</b>. 
+        Please open it and click the button inside to confirm your subscription.</p>
+        <button class="card__footer-button" style="margin-top:223px;">Dismiss message</button>`;
       }
 
-      handleDesktop(desktop);
-      desktop.addEventListener('change', handleDesktop);
+      //Success message on Desktop
+      function executeOnDesktop() {
+        const header_des = document.querySelector('.card__header-image');
+        const content_des = document.querySelector('.card__content');
+        const input_text = document.querySelector('.card__footer-input').value;
+
+        header_des.style.display = 'none';
+        content_des.innerHTML = '';
+        content_des.style.width = '504px';
+        content_des.style.padding = "48px 64px 64px 64px";
+            
+        content_des.style.borderRadius = '36px';
+        content_des.innerHTML = ` 
+        <img 
+        class"card__header-image"
+        src="assets/images/icon-success.svg"
+        alt="Orange circle with checkmark inside it"
+        style="margin-bottom: 40px;"
+        ></img>
+        <h1 class="card__title">Thanks for subscribing!</h1>
+        <p class="card__headline">A confirmation email has been sent to <b>${input_text}</b>. 
+        Please open it and click the button inside to confirm your subscription.</p>
+        <button class="card__footer-button card__footer-button--active" style="margin-top:40px;">Dismiss message</button>`;
+      }
+      
     </script>
 </body>
 </html>

@@ -107,6 +107,26 @@ body {
     font-weight: bold;
     line-height: 150%;
 }
+.card__footer-button:hover {
+    cursor: pointer;
+}
+.card__footer-button--active:active {
+    background: linear-gradient(45deg, #FF6A3A, #FF527B);
+}
+.card__footer-input:invalid {
+    border-color: var(--tomate);
+    background: hsla(4, 100%, 67%, 0.15);
+    color: var(--tomate);
+}
+.card__footer-input:focus:invalid {
+    outline: none;
+    
+}
+.error {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--tomate);
+}
 
 /*Desktop*/
 @media (min-width: 1024px) {
@@ -124,6 +144,9 @@ body {
         padding: 21.5px;
         border-radius: 0 36px 36px 0;
     }
+    .card__title {
+        font-size: 56px;
+    }
     .card__content {
         grid-area: content;
         width: 100%;
@@ -132,9 +155,5 @@ body {
     }
     .card__footer {
         width: 100%;
-    }
-
-    .card__title {
-        font-size: 56px;
     }
 }
